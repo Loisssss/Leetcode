@@ -1,20 +1,30 @@
 class Solution { 
     public int reverse(int x) { 
-        int result = 0; 
-        String str = String.valueOf(x); 
-        for (int i = str.length()-1; i >= 0; i--) { 
-            if (i == 0 && str.charAt(i) == '-') { 
-                result *= -1; 
-            } else if (str.charAt(i) >= '0' && str.charAt(i) <= '9') {
-                result = result * 10; 
-                result = result + (int)str.charAt(i) - '0'; 
-            } else { 
-                return 0; 
-            } 
-        } 
-
-        return result; 
-    } 
+        boolean flag = true;
+        int sum = 0;
+        double max = Math.pow(2,31) -1;
+        if (x < 0){
+            flag = false;
+            x = -x;
+        }
+        while(x > 0) {
+            int remainder = x % 10;
+            if (sum > (Math.pow(2,31) -1) / 10 ) {
+                return 0;
+            }
+            sum *= 10;
+            sum += remainder;
+            x /= 10;
+        }
+        if (flag == false) {
+            return -sum;
+        }else {
+            return sum;
+        }
+    }
+    public static void main(String []args) {
+        Solution solu = new Solution();
+	int result = solu.reverse(1238665);
+        System.out.println(result);
+    }
 }
-            
-
